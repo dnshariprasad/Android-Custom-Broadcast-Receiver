@@ -21,21 +21,22 @@ public class MyReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
 
-        b.setAutoCancel(true)
-                .setDefaults(Notification.COLOR_DEFAULT)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
-                        R.mipmap.ic_launcher))
+
+        Notification notification = new Notification.Builder(context)
                 .setTicker("That is displayed in the status bar")
                 .setContentTitle("Title (first row) of the notification, in a standard notification")
                 .setContentText("Text (second row) of the notification, in a standard notification")
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                        R.mipmap.ic_launcher))
+                .setStyle(new Notification.BigPictureStyle()
+                        .bigPicture(BitmapFactory.decodeResource(context.getResources(),
+                                R.mipmap.ic_launcher)))
                 .setContentIntent(contentIntent)
-                .addAction(R.mipmap.ic_launcher, "Ok", contentIntent);
-
+                .build();
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, b.build());
+        notificationManager.notify(1, notification);
     }
 }
