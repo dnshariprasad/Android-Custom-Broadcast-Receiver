@@ -15,11 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name="hari.custombroadcastreceiver.MyReceiver">
+
+        <receiver android:name=".MyReceiver">
             <intent-filter>
                 <action android:name="hari.custombroadcastreceiver.CLICK_BR" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".NotificationActivity"></activity>
     </application>
 
 </manifest>

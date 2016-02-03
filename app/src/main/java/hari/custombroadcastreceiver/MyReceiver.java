@@ -1,9 +1,13 @@
 package hari.custombroadcastreceiver;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
+import android.graphics.BitmapFactory;
+import android.support.v7.app.NotificationCompat;
 
 /**
  * Created by Hari on 31/01/16.
@@ -11,7 +15,27 @@ import android.widget.Toast;
 public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "Action: " + intent.getAction(), Toast.LENGTH_SHORT).show();
 
+        Intent notificationActivityIntent = new Intent(context, NotificationActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder b = new NotificationCompat.Builder(context);
+
+        b.setAutoCancel(true)
+                .setDefaults(Notification.COLOR_DEFAULT)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                        R.mipmap.ic_launcher))
+                .setTicker("That is displayed in the status bar")
+                .setContentTitle("Title (first row) of the notification, in a standard notification")
+                .setContentText("Text (second row) of the notification, in a standard notification")
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+                .setContentIntent(contentIntent)
+                .addAction(R.mipmap.ic_launcher, "Ok", contentIntent);
+
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, b.build());
     }
 }
