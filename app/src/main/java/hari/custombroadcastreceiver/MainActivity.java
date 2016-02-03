@@ -14,20 +14,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        filter = new IntentFilter("hari.custombroadcastreceiver.CLICK_BR");
-        myReceiver = new MyReceiver();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver(myReceiver, filter);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(myReceiver);
     }
 
     public void broadCastPlease(View view) {
